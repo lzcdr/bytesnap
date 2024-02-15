@@ -1,0 +1,24 @@
+{{ preamble }}
+#ifndef __{{ servicename.upper() }}_SERVICE_HPP
+#define __{{ servicename.upper() }}_SERVICE_HPP
+
+#include "{{ servicename.lower() }}_method_id.hpp"
+#include "vst_message.hpp"
+
+{% for id in list_of_method_ids %}    
+#include "{{ servicename.lower() }}_{{ id[1].lower() }}.hpp"{% endfor %}
+
+namespace {{ namespace }} {
+
+struct {{ servicename.lower() }}_message_processor
+{
+    vst::message_error_code operator()(const vst::buffer& input, vst::buffer& output);
+
+private:
+    {% for id in list_of_method_ids %}{{ servicename.lower() }}_{{ id[1].lower() }}_message_processor {{ servicename.lower() }}_{{ id[1].lower() }}_msg_proc_;
+    {% endfor %}
+};
+
+} // namespace {{ namespace }}
+
+#endif //__{{ servicename.upper() }}_SERVICE_HPP

@@ -1,0 +1,30 @@
+{{ preamble }}
+
+#include <cassert>
+#include <iostream>
+
+#include "{{ servicename.lower() }}_client.hpp"
+
+int main(int argc, char** argv)
+{
+    if (argc != 3) {
+        std::cout << "Usage: provide two arguments - ip-address (127.0.0.1) and port" << std::endl;
+        return 1;
+    }
+    std::string address = argv[1];
+    std::string port = argv[2];
+
+    {{ namespace }}::{{ servicename.lower() }}_client client(address, port);
+    {%for method in methods %}
+    {
+        {{ namespace }}::{{ method[1] }} request;
+        {{ namespace }}::{{ method[2] }} reply;
+
+        for (int i = 0; i < 100; i++)
+            assert(client.{{ servicename.lower() }}_{{ method[0].lower() }}_request(request, reply) == true);
+    }
+    std::cout << "{{ servicename.lower() }}_{{ method[0].lower() }}_request - ok" << std::endl;
+    {% endfor %}
+
+    return 0;
+}

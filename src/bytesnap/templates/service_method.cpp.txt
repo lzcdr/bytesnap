@@ -1,0 +1,30 @@
+{{ preamble }}
+#include "{{ servicename }}_{{ methodname }}.hpp"
+#include "bytesnap.hpp"
+#include "{{ request.lower() }}.hpp"
+{% if request.lower() != response.lower() %}#include "{{ response.lower() }}.hpp"{% endif %}
+
+namespace {{ namespace }} {
+
+vst::message_error_code {{ servicename }}_{{ methodname }}_message_processor::operator()(const vst::buffer& input, vst::buffer& output)
+{
+    // decode request message
+    {{ request }} request;
+    bytesnap::reader rd(input.base());
+    if (!{{ request }}::decode(request, rd)) {
+        return vst::message_error_code::BAD_REQUEST_MESSAGE;
+    }
+
+    // TODO - process request, build response
+    {{ response }} response;
+
+    // encode response message
+    output.base().clear();
+    bytesnap::writer wr(output.base());
+    std::size_t sz = {{ response }}::encode(response, wr);
+    output.fit();
+
+    return vst::message_error_code::OK;
+}
+
+} // namespace {{ namespace }}

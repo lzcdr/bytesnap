@@ -1,0 +1,24 @@
+{{ preamble }}
+
+// {{ structname_lower }}.hpp
+
+#ifndef __{{ structname_upper }}_HPP
+#define __{{ structname_upper }}_HPP
+ 
+#include "bytesnap.hpp"
+
+{{ headers }}
+
+{{ namespace_begin }}
+
+struct {{ structname }}
+{
+{{ fields }}
+{{ ctor }}
+{{ encode }}
+{{ decode }}
+};
+
+{{ namespace_end }}
+
+#endif // __{{ structname_upper }}_HPP

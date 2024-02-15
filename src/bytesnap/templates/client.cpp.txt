@@ -1,0 +1,42 @@
+{{ preamble }}
+#include <vector>
+#include <cstdint>
+#include "{{ servicename.lower() }}_client.hpp"
+#include "bytesnap.hpp"
+#include "vst_client.hpp"
+#include "vst_log_mockup.hpp"
+
+namespace {{ namespace }} {
+
+{{ servicename.lower() }}_client::{{ servicename.lower() }}_client(const std::string& ip_address, const std::string& port)
+    : client_(io_context_, ip_address, port), key_(0)
+{
+}
+
+{%for method in methods %}
+bool {{ servicename.lower() }}_client::{{ servicename.lower() }}_{{ method[0].lower() }}_request(const {{ method[1] }}& request, {{ method[2] }}& reply)
+{
+    // encode request message
+    request_base_.clear();
+    bytesnap::writer wr(request_base_);
+    std::size_t sz = {{ method[1] }}::encode(request, wr);
+
+    // send request, get reply
+    vst::buffer request_buffer(request_base_, static_cast<uint32_t>({{ servicename.lower() }}_method_id::{{ method[0].upper() }}));
+    request_buffer.fit();
+    vst::buffer reply_buffer(reply_base_, static_cast<uint32_t>({{ servicename.lower() }}_method_id::{{ method[0].upper() }}));
+    if(!client_.get(request_buffer, reply_buffer, key_)) {
+        return false;
+    }
+
+    // decode reply message
+    bytesnap::reader rd(reply_base_);
+    if (!{{ method[2] }}::decode(reply, rd)) {
+        return false;
+    }
+
+    return true;
+}
+{% endfor %}
+
+} // namespace {{ namespace }}

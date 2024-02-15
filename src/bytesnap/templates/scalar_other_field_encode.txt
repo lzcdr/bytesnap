@@ -1,0 +1,1 @@
+        writer.write_{{ field_typename }}(source.{{ fieldname }});

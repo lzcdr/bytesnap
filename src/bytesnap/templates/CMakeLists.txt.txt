@@ -1,0 +1,68 @@
+cmake_minimum_required(VERSION 3.15)
+
+{% for servicename in servicenames %}
+set({{ servicename.upper() }}_SERVER_PROJECT_NAME {{ servicename.lower() }}_server)
+project(${% raw %}{{% endraw %}{{ servicename.upper() }}_SERVER_PROJECT_NAME} VERSION {{ version_string }} LANGUAGES C CXX)
+
+set({{ servicename.upper() }}_CLIENT_PROJECT_NAME {{ servicename.lower() }}_client)
+project(${% raw %}{{% endraw %}{{ servicename.upper() }}_CLIENT_PROJECT_NAME} VERSION {{ version_string }} LANGUAGES C CXX)
+{% endfor %}
+
+set(CMAKE_CXX_STANDARD 20)
+
+set(CMAKE_BUILD_TYPE Debug)
+#set(CMAKE_BUILD_TYPE Release)
+
+if (WIN32)
+  add_definitions(-D_WIN32_WINNT=0x0A00)
+endif()
+
+if(MSVC)
+    message("MSVC compiler detected")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /DEBUG /Od")
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /O2")
+else()
+    message("Non-MSVC compiler detected")
+    if(CMAKE_BUILD_TYPE MATCHES Debug)
+        add_compile_options(
+            "-std=c++2a" "-Wall" "-fno-strict-aliasing" "-pthread" "-pedantic" "-ggdb3" "-O0")
+    else()
+        add_compile_options(
+            "-std=c++2a" "-Wall" "-fno-strict-aliasing" "-pthread" "-pedantic" "-O2")
+    endif()
+endif()
+
+set(BOOST_ROOT "{{ boost_pathname }}")
+set(Boost_USE_STATIC_LIBS OFF) 
+set(Boost_USE_MULTITHREADED ON)  
+set(Boost_USE_STATIC_RUNTIME OFF) 
+find_package(Boost REQUIRED COMPONENTS system)
+
+set(SERVER_SOURCE_FILES 
+    vst_server.hpp 
+    vst_io_context_pool.hpp 
+    vst_connection.hpp 
+    vst_message.hpp 
+    vst_buffer.hpp 
+    vst_log_mockup.hpp
+)
+
+set(CLIENT_SOURCE_FILES 
+    vst_client.hpp 
+    vst_log_mockup.hpp
+)
+{% for servicename in servicenames %}
+set({{ servicename.upper() }}_SERVER_SOURCE_FILES ${SERVER_SOURCE_FILES}
+    {{ servicename.lower() }}_service.hpp {{ servicename.lower() }}_service.cpp
+{% for methodname in methodnames[servicename] %}    {{ servicename.lower() }}_{{ methodname }}.hpp {{ servicename.lower() }}_{{ methodname }}.cpp
+{% endfor %})
+add_executable(${% raw %}{{% endraw %}{{ servicename.upper() }}_SERVER_PROJECT_NAME} ${% raw %}{{% endraw %}{{ servicename.upper() }}_SERVER_SOURCE_FILES})
+target_link_libraries(${% raw %}{{% endraw %}{{ servicename.upper() }}_SERVER_PROJECT_NAME} PUBLIC Boost::boost)
+
+set({{ servicename.upper() }}_CLIENT_SOURCE_FILES ${CLIENT_SOURCE_FILES}
+    {{ servicename.lower() }}_client.hpp {{ servicename.lower() }}_client.cpp {{ servicename.lower() }}_client_test.cpp
+{% for methodname in methodnames[servicename] %}    {{ servicename.lower() }}_{{ methodname }}.hpp {{ servicename.lower() }}_{{ methodname }}.cpp
+{% endfor %})
+add_executable(${% raw %}{{% endraw %}{{ servicename.upper() }}_CLIENT_PROJECT_NAME} ${% raw %}{{% endraw %}{{ servicename.upper() }}_CLIENT_SOURCE_FILES})
+target_link_libraries(${% raw %}{{% endraw %}{{ servicename.upper() }}_CLIENT_PROJECT_NAME} PUBLIC Boost::boost)
+{% endfor %}

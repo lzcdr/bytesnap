@@ -1,0 +1,28 @@
+const SIGNATURE = { 0xDEAD, 0xBEEF }
+const CODE_LENGTH = 2
+const ATTACHMENT = { "this is example", "(c) 2024" }
+
+struct Header {
+    signature: vector<uint64_t> = SIGNATURE
+    code: vector<uint8_t>(CODE_LENGTH)
+    attachment: vector<string> = ATTACHMENT
+}
+
+struct UserInfo {
+    login: string
+    num_messages: uint32_t
+}
+
+struct UserQueryRequest {
+    header: Header
+    user_logins: vector<string>
+}
+
+struct UserQueryResponse {
+    header: Header
+    user_infos: vector<UserInfo>
+}
+
+service Example {
+    user_query: UserQueryRequest -> UserQueryResponse
+}

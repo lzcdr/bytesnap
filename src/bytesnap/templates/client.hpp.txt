@@ -1,0 +1,37 @@
+{{ preamble }}
+#ifndef __{{ servicename.upper() }}_CLIENT_HPP
+#define __{{ servicename.upper() }}_CLIENT_HPP
+
+#include <vector>
+#include <string>
+#include <cstdint>
+#include "vst_buffer.hpp"
+#include "vst_client.hpp"
+#include "{{ servicename.lower() }}_method_id.hpp"
+
+{% for include in client_includes %}
+#include "{{ include.lower() }}.hpp"{% endfor %}
+
+namespace {{ namespace }} {
+
+class {{ servicename.lower() }}_client
+{
+public:
+    {{ servicename.lower() }}_client(const std::string& ip_address, const std::string& port);
+
+    {{ servicename.lower() }}_client(const {{ servicename.lower() }}_client&) = delete;
+    {{ servicename.lower() }}_client& operator=(const {{ servicename.lower() }}_client&) = delete;
+    {%for method in methods %}
+    bool {{ servicename.lower() }}_{{ method[0].lower() }}_request(const {{ method[1] }}& request, {{ method[2] }}& reply);{% endfor %}
+
+private:
+    std::vector<uint8_t> request_base_;
+    std::vector<uint8_t> reply_base_;
+    boost::asio::io_context io_context_;
+    vst::client client_;
+    uint32_t key_;
+};
+
+} // namespace {{ namespace }}
+
+#endif //__{{ servicename.upper() }}_CLIENT_HPP

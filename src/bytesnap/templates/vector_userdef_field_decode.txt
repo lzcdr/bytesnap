@@ -1,0 +1,6 @@
+        std::optional<uint32_t> {{ fieldname }}_size = reader.read_uint32_t();
+        if (!{{ fieldname }}_size) return false;
+        target.{{ fieldname }}.resize({{ fieldname }}_size.value());
+        for (int i = 0; i < {{ fieldname }}_size.value(); i++) {
+            if (!{{ field_typename }}::decode(target.{{ fieldname }}[i], reader)) return false;
+        }

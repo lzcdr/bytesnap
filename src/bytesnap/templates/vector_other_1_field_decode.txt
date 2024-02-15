@@ -1,0 +1,4 @@
+        std::optional<std::pair<size_t, {{ field_typename }}*>> {{ fieldname }} = reader.get_bytes_ptr();
+        if (!{{ fieldname }}) return false;
+        target.{{ fieldname }}.resize({{ fieldname }}.value().first);
+        memcpy(target.{{ fieldname }}.data(), {{ fieldname }}.value().second, {{ fieldname }}.value().first);

@@ -1,0 +1,40 @@
+{{ preamble }}
+#include "{{ servicename.lower() }}_service.hpp"
+#include "vst_buffer.hpp"
+#include "vst_server.hpp"
+#include <thread>
+
+namespace {{ namespace }} {
+
+vst::message_error_code {{ servicename.lower() }}_message_processor::operator()(const vst::buffer& input, vst::buffer& output)
+{
+    switch (input.method_type_id()) {
+        {% for id in list_of_method_ids %}case static_cast<uint32_t>({{ servicename.lower() }}_method_id::{{ id[1].upper() }}):
+            return {{ servicename.lower() }}_{{ id[1].lower() }}_msg_proc_(input, output);
+        {% endfor %}
+        default:
+            return vst::message_error_code::MESSAGE_PROCESSOR_NOT_FOUND;
+    }
+}
+
+} // namespace {{ namespace }}
+
+static const uint32_t MAX_MESSAGE_SIZE = {{ max_msg_size }};
+
+int main(int argc, char** argv)
+{
+    if (argc != 3) {
+        std::cout << "Usage: provide two arguments - ip-address (127.0.0.1) and port" << std::endl;
+        return 1;
+    }
+    std::string address = argv[1];
+    std::string port = argv[2];
+
+    vst::server<{{ namespace }}::{{ servicename.lower() }}_message_processor> srv(
+        std::thread::hardware_concurrency(),
+        MAX_MESSAGE_SIZE
+    );
+    srv.run(address, port);
+
+    return 0;
+}

@@ -1,0 +1,7 @@
+    template <typename T = bytesnap::writer> static size_t encode(const {{ structname }}& source, T& writer) {
+        size_t before = writer.size();
+
+{{ encode_body }}
+        size_t after = writer.size();
+        return after - before;
+    }

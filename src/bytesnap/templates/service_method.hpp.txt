@@ -1,0 +1,11 @@
+{{ preamble }}
+#include "vst_message.hpp"
+
+namespace {{ namespace }} {
+
+struct {{ servicename }}_{{ methodname }}_message_processor
+{
+    vst::message_error_code operator()(const vst::buffer& input, vst::buffer& output);
+};
+
+} // namespace {{ namespace }}

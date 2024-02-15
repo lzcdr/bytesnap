@@ -1,0 +1,1 @@
+        writer.write_string_view(source.{{ fieldname }});

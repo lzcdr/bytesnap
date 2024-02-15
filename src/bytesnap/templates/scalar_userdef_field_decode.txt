@@ -1,0 +1,1 @@
+        if (!{{ field_typename }}::decode(target.{{ fieldname }}, reader)) return false;

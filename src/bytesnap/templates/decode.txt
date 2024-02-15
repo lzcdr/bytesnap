@@ -1,0 +1,4 @@
+    template <typename T = bytesnap::reader> static bool decode({{ structname }}& target, T& reader) {
+{{ decode_body }}
+        return true;
+    }

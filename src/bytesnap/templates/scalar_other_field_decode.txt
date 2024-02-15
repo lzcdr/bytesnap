@@ -1,0 +1,3 @@
+        std::optional<{{ field_typename }}> {{ fieldname }} = reader.read_{{ field_typename }}();
+        if (!{{ fieldname }}) return false;
+        target.{{ fieldname }} = {{ fieldname }}.value();

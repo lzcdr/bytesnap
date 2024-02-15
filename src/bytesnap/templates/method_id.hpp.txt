@@ -1,0 +1,17 @@
+{{ preamble }}
+#ifndef __{{ servicename.upper() }}_MESSAGE_ID_HPP
+#define __{{ servicename.upper() }}_MESSAGE_ID_HPP
+
+#include <cstdint>
+
+namespace {{ namespace }} {
+
+enum class {{ servicename.lower() }}_method_id : uint32_t
+{
+{% for id in list_of_method_ids %}    {{ id[1].upper() }} = {{ id[0] }}{% if not loop.last %},{% endif %}
+{% endfor %}
+};
+
+} // namespace {{ namespace }}
+
+#endif //__{{ servicename.upper() }}_MESSAGE_ID_HPP

@@ -1,0 +1,3 @@
+        std::optional<std::string_view> {{ fieldname }} = reader.get_string_view();
+        if (!{{ fieldname }}) return false;
+        target.{{ fieldname }} = std::string{ {{ fieldname }}.value() };
