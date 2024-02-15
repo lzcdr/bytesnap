@@ -32,7 +32,7 @@ To get started with Bytesnap RPC, follow these steps:
 
     2.1. *Clone the Repository*
     ```console
-    git clone https://github.com/bytesnap/rpc.git
+    git clone https://github.com/lzcdr/bytesnap.git
     ```
     2.2. *Create a Virtual Environment*
     ```console
