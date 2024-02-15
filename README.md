@@ -145,8 +145,8 @@ In *'example_client_test.cpp'* replace
 ```
 with
 ```c
-    example2::UserQueryRequest request;
-    example2::UserQuesryResponse reply;
+    example::UserQueryRequest request;
+    example::UserQuesryResponse reply;
 
     request.user_logins.push_back("alpha");
     request.user_logins.push_back("beta");
