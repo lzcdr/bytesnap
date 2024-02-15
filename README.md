@@ -166,6 +166,8 @@ with
         assert(reply.user_infos[2].num_messages == 2);
     }
 ```
+Then follow instructions in *'readme.1st'*.
+
 
 ## IDL description
 
