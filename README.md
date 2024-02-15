@@ -31,34 +31,34 @@ To get started with Bytesnap RPC, follow these steps:
 2. **Install**: To install Bytesnap RPC framework, follow these steps.
 
     2.1. *Clone the Repository*
-    ```bash
+    ```console
     git clone https://github.com/bytesnap/rpc.git
     ```
     2.2. *Create a Virtual Environment*
-    ```bash
+    ```console
     python3 -m venv .venv
     ```
     2.3. *Activate the Virtual Environment*
     - for Linux
-    ```bash
+    ```console
     source .venv/bin/activate
     ```
     - for Windows
-    ```bash
+    ```console
     # in cmd.exe
     .venv\Scripts\activate.bat
     # in PowerShell
     .venv\Scripts\activate.ps1
     ```
     2.4. *Install Requirements* 
-    ```bash
+    ```console
     pip install -r requirements.txt
     ```
 
 3. **Define Interfaces**: Create a custom IDL file to define the remote interfaces and data structures for your application, see examples below.
 
 4. **Generate Code**: Use the provided Python script to generate C++ source code from the custom IDL file.
-    ```bash
+    ```console
     # for Linux
     bytesnap_run.sh
     # for Windows
@@ -66,7 +66,7 @@ To get started with Bytesnap RPC, follow these steps:
     ```
 
     Then answer some questions:
-    ```
+    ```console
     [?] Project name: example
     [?] Version string: 0.0.1
     [?] Description: ...
@@ -83,7 +83,7 @@ To get started with Bytesnap RPC, follow these steps:
 
 Here's a simple example of defining a remote interface using the custom IDL file:
 
-```c
+```python
 const SIGNATURE = { 0xDEAD, 0xBEEF }
 const CODE_LENGTH = 2
 const ATTACHMENT = { "this is example", "(c) 2024" }
@@ -176,7 +176,7 @@ In Bytesnap RPC IDL you define structures, services and constants. Python-style 
 The structure basically follows the simple C-like structure, that is, it is a composition of named variables (structure fields) of supported data types. 
 
 Example:
-```c
+```python
 struct SomeStrcuture {
     # example of field with scalar datatype int32_t
     integerField: int32_t
@@ -224,7 +224,7 @@ Scalar types are:
 Vector datatypes correspond to std::vector. If structure fields of vector datatypes are neither initialized with some values nor have a predetermined fixed length, then they will be created empty by default.
 
 Structure fields (of scalar and vector of scalar types) may be initialized with constants. Examples of const definitions:
-```c
+```python
 const SIGNATURE = { 0x0A, 0x0B, 0x0C, 0x0D }
 const PI = 3.1415926
 const MAX = 100
@@ -232,7 +232,7 @@ const WORDS = { "hello", "world" }
 ```
 
 The service is composed of named methods (procedures) that define the request and response structures used for RPC communication. The client sends the request structure and receives the response, while the server does the opposite, i.e., it receives and processes the request and sends back the response. Example of service definition:
-```c
+```python
 service SomeService {
     method1: SomeRequestStruct -> SomeResponseStruct
     method2: SomeOtherRequestStruct -> SomeOtherResponseStruct
