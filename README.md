@@ -38,35 +38,49 @@ To get started with Bytesnap RPC, follow these steps:
     cd bytesnap
     ```
     2.2. *Create a Virtual Environment*
+    - for Windows
     ```console
     python -m venv .venv
+    ```
+    - for Linux
+    ```console
+    python3 -m venv .venv
     ```
     2.3. *Activate the Virtual Environment*
     - for Linux
     ```console
     source .venv/bin/activate
     ```
-    - for Windows
+    - for Windows cmd.exe
     ```console
-    # in cmd.exe
     .venv\Scripts\activate.bat
-    # in PowerShell
+    ```
+    - for Windows PowerShell
+    ```console
     .venv\Scripts\activate.ps1
     ```
     2.4. *Install Requirements* 
     ```console
     pip install -r requirements.txt
     ```
-
-3. **Define Interfaces**: Create a custom IDL file to define the remote interfaces and data structures for your application, see examples below.
-
-4. **Generate Code**: Use the provided Python script to generate C++ source code from the custom IDL file.
+    2.5. *Make Run Script Executable (for Linux only)*
     ```console
-    # for Linux
-    bytesnap_run.sh
-    # for Windows
+    chmod u+x bytesnap_run.sh
+    ``` 
+
+4. **Define Interfaces**: Create a custom IDL file to define the remote interfaces and data structures for your application, see examples below.
+
+5. **Generate Code**: Use the provided Python script to generate C++ source code from the custom IDL file.
+    - for Linux
+    ```console
+    ./bytesnap_run.sh
+    ```
+    - for Windows
+    ```console
     bytesnap_run.bat
     ```
+
+    Create somehow the output directory *../build/example*
 
     Then answer some questions:
     ```console
@@ -81,7 +95,7 @@ To get started with Bytesnap RPC, follow these steps:
     ```
     Note: you should specify valid existing files and directories.
 
-5. **Integrate with Your Project**: Incorporate the generated C++ source code into your C++ project and start using Bytesnap RPC to facilitate remote communication. See *'readme.1st'* in the output folder for instructions.
+7. **Integrate with Your Project**: Incorporate the generated C++ source code into your C++ project and start using Bytesnap RPC to facilitate remote communication. See *'readme.1st'* in the output folder for instructions.
 
 ## Example
 
