@@ -24,7 +24,7 @@ To get started with Bytesnap RPC, follow these steps:
 1. **Prerequisites**: Ensure that you have installed on your system:
 
 - *C++ 20 Compiler*
-- *C++ Boost library version 1.84 or higher*
+- *C++ Boost library version 1.74 or higher*
 - *Python version 3.10 or higher*
 - *CMake version 3.15 or higher*
 
@@ -93,7 +93,9 @@ To get started with Bytesnap RPC, follow these steps:
     [?] Boost dir: c:/boost_1_84_0
     [?] Maximum size of the message in bytes: 65535
     ```
-    Note: you should specify valid existing files and directories.
+    Note: 
+    You should specify valid existing files and directories. 
+    A good answer for the "Boost dir" on Linux can be /usr/include/boost
 
 7. **Integrate with Your Project**: Incorporate the generated C++ source code into your C++ project and start using Bytesnap RPC to facilitate remote communication. See *'readme.1st'* in the output folder for instructions.
 
