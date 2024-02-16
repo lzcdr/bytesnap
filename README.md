@@ -34,9 +34,12 @@ To get started with Bytesnap RPC, follow these steps:
     ```console
     git clone https://github.com/lzcdr/bytesnap.git
     ```
+    ```console
+    cd bytesnap
+    ```
     2.2. *Create a Virtual Environment*
     ```console
-    python3 -m venv .venv
+    python -m venv .venv
     ```
     2.3. *Activate the Virtual Environment*
     - for Linux
@@ -76,6 +79,7 @@ To get started with Bytesnap RPC, follow these steps:
     [?] Boost dir: c:/boost_1_84_0
     [?] Maximum size of the message in bytes: 65535
     ```
+    Note: you should specify valid existing files and directories.
 
 5. **Integrate with Your Project**: Incorporate the generated C++ source code into your C++ project and start using Bytesnap RPC to facilitate remote communication. See *'readme.1st'* in the output folder for instructions.
 
