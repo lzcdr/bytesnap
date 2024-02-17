@@ -166,7 +166,7 @@ In *'example_client_test.cpp'* replace
 with
 ```c
     example::UserQueryRequest request;
-    example::UserQuesryResponse reply;
+    example::UserQueryResponse reply;
 
     request.user_logins.push_back("alpha");
     request.user_logins.push_back("beta");
