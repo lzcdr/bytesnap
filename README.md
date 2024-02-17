@@ -189,7 +189,21 @@ with
 Then follow instructions in *'readme.1st'*.
 
 
-## IDL description
+## How to Test This Generator (And Make Sure Everything Is Mostly Okay)
+
+One-liner (venv must be activated):
+```console
+python ./src/test.py
+```
+If everything is fine (IDL processed, c++ sources generated, CMake project build ok), then you should see
+```console
+*****************************
+Success! All testd passed OK.
+*****************************
+```
+at the end.
+
+## IDL Description
 
 ### Basic Concepts
 

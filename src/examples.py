@@ -1,9 +1,12 @@
 import os
 from pathlib import Path
 from bytesnap.generator_cpp import GeneratorCPP
+from bytesnap.logger import Logger, LoggerLevel
 
 
-#if __name__ == "__main__":
+Logger(True, False).set_level(LoggerLevel.INFO)
+
+# if __name__ == "__main__":
 this_path = os.path.dirname(os.path.realpath(__file__))
 
 gen = GeneratorCPP(
@@ -14,6 +17,6 @@ gen = GeneratorCPP(
     rpc_version='0.1.0'
 )
 gen.generate(
-    Path(this_path) / "examples/example/example.txt", 
-    Path(this_path) / "examples/example", 
+    Path(this_path) / "examples/example/example.txt",
+    Path(this_path) / "examples/example",
     "c:/Development/boost_1_84_0")

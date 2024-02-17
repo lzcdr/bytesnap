@@ -34,7 +34,7 @@ def save_local_cfg(cfg: dict[str, str]) -> None:
 
 if __name__ == "__main__":
     Logger(True, False).set_level(LoggerLevel.INFO)
-    
+
     this_path = os.path.dirname(os.path.realpath(__file__))
 
     cfg = read_local_cfg()
