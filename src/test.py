@@ -37,6 +37,11 @@ gen.generate(
 
 commands = [
     "mkdir ./build",
+    "dir",
+    "cd ./build && cmake ..",
+    "cd ./build && cmake --build ."
+] if sys.platform.startswith('win') else [
+    "mkdir ./build",
     "ls -ls",
     "cd ./build && cmake ..",
     "cd ./build && cmake --build ."
