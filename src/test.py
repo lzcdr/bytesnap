@@ -36,10 +36,10 @@ gen.generate(
     10000)
 
 commands = [
-    "mkdir ./build",
+    "mkdir build",
     "dir",
-    "cd ./build && cmake ..",
-    "cd ./build && cmake --build ."
+    "cd build && cmake ..",
+    "cd build && cmake --build ."
 ] if sys.platform.startswith('win') else [
     "mkdir ./build",
     "ls -ls",
@@ -61,8 +61,8 @@ for cmd in commands:
         print(f"Error! Return code: {e.returncode}")
 
 output_filenames = [
-    'example_client.exe',
-    'example_server.exe'
+    'Debug/example_client.exe',
+    'Debug/example_server.exe'
 ] if sys.platform.startswith('win') else [
     'example_client',
     'example_server'
