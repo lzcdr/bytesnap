@@ -103,7 +103,7 @@ To get started with project generator and Bytesnap RPC, follow these steps:
 
 ## Example
 
-Here's a simple example of defining a remote interface using the custom IDL file:
+Here's an example of IDL file:
 
 ```python
 const SIGNATURE = { 0xDEAD, 0xBEEF }
