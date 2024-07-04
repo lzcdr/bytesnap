@@ -1,3 +1,5 @@
+# This is python-based project generator for Bytesnap RPC Framework.
+
 # Bytesnap RPC Framework
 
 Bytesnap RPC is a lightweight RPC (Remote Procedure Call) framework based on C++ Boost.Asio, designed to simplify communication between distributed systems. It utilizes Python to generate C++ source code from a custom Interface Definition Language (IDL) file, making it easier to define and implement remote interfaces.
@@ -19,7 +21,7 @@ Bytesnap RPC is a lightweight RPC (Remote Procedure Call) framework based on C++
 
 ## Getting Started
 
-To get started with Bytesnap RPC, follow these steps:
+To get started with project generator and Bytesnap RPC, follow these steps:
 
 1. **Prerequisites**: Ensure that you have installed on your system:
 
@@ -28,7 +30,7 @@ To get started with Bytesnap RPC, follow these steps:
 - *Python version 3.10 or higher*
 - *CMake version 3.15 or higher*
 
-2. **Install**: To install Bytesnap RPC framework, follow these steps.
+2. **Install**: To install project generator for Bytesnap RPC framework, follow these steps.
 
     2.1. *Clone the Repository*
     ```console
