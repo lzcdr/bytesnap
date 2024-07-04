@@ -136,7 +136,7 @@ service Example {
 }
 ```
 
-After generating the code, you will get a set of project files in the chosen output directory.
+After generating the code, you will get project files in the chosen output directory.
 To use them, you must define request processors on the server side (*'example_user_query.cpp'*) and test requests on the client side (*'example_client_test.cpp'*).
 
 In *'example_user_query.cpp'* replace
